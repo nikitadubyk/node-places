@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import MainNavigation from './shared/components/Navigation/MainNavigation'
 import Users from './user/pages/Users'
-import NewPlaces from './places/pages/NewPlaces'
+import NewPlace from './places/pages/NewPlace'
 import UserPlaces from './places/pages/UserPlaces'
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
             <main>
                 <Routes>
                     <Route path='/' element={<Users />} />
-                    <Route path='/places/new' element={<NewPlaces />} />
+                    <Route path='/places/new' element={<NewPlace />} />
                     <Route path='/:userId/places' element={<UserPlaces />} />
                     <Route path='*' element={<Navigate to='/' replace />} />
                 </Routes>
