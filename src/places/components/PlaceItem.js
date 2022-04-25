@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Card from '../../shared/components/UIElements/Card'
 import Button from '../../shared/components/FormElements/Button'
 import Modal from '../../shared/components/UIElements/Modal'
+import Map from '../../shared/components/UIElements/Map'
 
 import './PlaceItem.css'
 
@@ -12,8 +13,8 @@ const PlaceItem = ({
     title,
     description,
     address,
-    creator,
-    location,
+    creatorId,
+    coordinates,
 }) => {
     const [showMap, setShowMap] = useState(false)
 
@@ -30,7 +31,9 @@ const PlaceItem = ({
                 footerClass='place-item__modal-action'
                 footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
             >
-                <div className='map-container'>MAP</div>
+                <div className='map-container'>
+                    <Map center={coordinates} zoom={16} />
+                </div>
             </Modal>
             <li className='place-item'>
                 <Card className='place-item__content'>
@@ -46,7 +49,7 @@ const PlaceItem = ({
                         <Button inverse onClick={openMapHandler}>
                             VIEW ON MAP
                         </Button>
-                        <Button to={`places/${id}`}>EDIT</Button>
+                        <Button to={`/places/${id}`}>EDIT</Button>
                         <Button danger>DELETE</Button>
                     </div>
                 </Card>

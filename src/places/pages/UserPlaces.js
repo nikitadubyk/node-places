@@ -5,24 +5,30 @@ import PlaceList from '../components/PlaceList'
 
 const USER_PLACES = [
     {
-        id: 1,
+        id: 'p1',
+        title: 'Empire State Building',
+        description: 'One of the most famous sky scrapers in the world!',
         imageUrl:
-            'https://www.planetware.com/wpimages/2019/11/india-best-places-to-visit-agra.jpg',
-        title: 'Test Title',
-        description: 'Some description to the place',
-        address: 'Kirova 6',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+        address: '20 W 34th St, New York, NY 10001',
+        location: {
+            lat: 40.7484405,
+            lng: -73.9878584,
+        },
         creatorId: '1',
-        location: '1234',
     },
     {
-        id: 2,
+        id: 'p2',
+        title: 'Empire State Building',
+        description: 'One of the most famous sky scrapers in the world!',
         imageUrl:
-            'https://www.planetware.com/wpimages/2019/11/india-best-places-to-visit-agra.jpg',
-        title: 'Test Title',
-        description: 'Some description to the place',
-        address: 'Kirova 6',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+        address: '20 W 34th St, New York, NY 10001',
+        location: {
+            lat: 40.7484405,
+            lng: -73.9878584,
+        },
         creatorId: '2',
-        location: '1234',
     },
 ]
 

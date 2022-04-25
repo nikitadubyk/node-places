@@ -1,16 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
 import { CSSTransition } from 'react-transition-group'
 
 import Backdrop from './Backdrop'
-
 import './Modal.css'
 
 const ModalOverlay = ({
     className,
-    headerStyle,
     style,
+    headerClass,
     header,
     onSubmit,
     contentClass,
@@ -20,10 +18,12 @@ const ModalOverlay = ({
 }) => {
     const content = (
         <div className={`modal ${className}`} style={style}>
-            <header className={`modal__header ${headerStyle}`}>
+            <header className={`modal__header ${headerClass}`}>
                 <h2>{header}</h2>
             </header>
-            <form onSubmit={onSubmit ? onSubmit : e => e.preventDefault()}>
+            <form
+                onSubmit={onSubmit ? onSubmit : event => event.preventDefault()}
+            >
                 <div className={`modal__content ${contentClass}`}>
                     {children}
                 </div>
@@ -44,7 +44,7 @@ const Modal = props => {
                 in={props.show}
                 mountOnEnter
                 unmountOnExit
-                timeout={500}
+                timeout={200}
                 classNames='modal'
             >
                 <ModalOverlay {...props} />
