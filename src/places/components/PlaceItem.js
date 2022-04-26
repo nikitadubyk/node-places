@@ -17,9 +17,18 @@ const PlaceItem = ({
     coordinates,
 }) => {
     const [showMap, setShowMap] = useState(false)
+    const [showConfirmed, setShowConfirmed] = useState(false)
 
     const openMapHandler = () => setShowMap(true)
     const closeMapHandler = () => setShowMap(false)
+
+    const showDeleteWarningHandler = () => setShowConfirmed(true)
+    const closeDeleteWarningHandler = () => setShowConfirmed(false)
+
+    const confirmDeleteHandler = () => {
+        setShowConfirmed(false)
+        console.log('DELETE')
+    }
 
     return (
         <>
@@ -35,6 +44,26 @@ const PlaceItem = ({
                     <Map center={coordinates} zoom={16} />
                 </div>
             </Modal>
+
+            <Modal
+                show={showConfirmed}
+                onCancel={closeDeleteWarningHandler}
+                header={'Are you shure?'}
+                footerClass='place-item__modal-action'
+                footer={
+                    <>
+                        <Button inverse onClick={closeDeleteWarningHandler}>
+                            CANSEL
+                        </Button>
+                        <Button danger onClick={confirmDeleteHandler}>
+                            DELETE
+                        </Button>
+                    </>
+                }
+            >
+                <p>Do you want to proceed and delete this place?</p>
+            </Modal>
+
             <li className='place-item'>
                 <Card className='place-item__content'>
                     <div className='place-item__image'>
@@ -50,7 +79,9 @@ const PlaceItem = ({
                             VIEW ON MAP
                         </Button>
                         <Button to={`/places/${id}`}>EDIT</Button>
-                        <Button danger>DELETE</Button>
+                        <Button danger onClick={showDeleteWarningHandler}>
+                            DELETE
+                        </Button>
                     </div>
                 </Card>
             </li>
