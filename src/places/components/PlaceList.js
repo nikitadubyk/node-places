@@ -9,12 +9,10 @@ import './PlaceList.css'
 const PlaceList = ({ items }) => {
     if (items.length === 0) {
         return (
-            <div>
+            <div className='place-list center'>
                 <Card>
-                    <h2 className='place-list center'>
-                        No places found. Maybe create one?
-                    </h2>
-                    <Button>Share place</Button>
+                    <h2>No places found. Maybe create one?</h2>
+                    <Button to='/places/new'>Share place</Button>
                 </Card>
             </div>
         )
