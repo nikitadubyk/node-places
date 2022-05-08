@@ -1,6 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../../shared/context/auth-context'
+import { useHttp } from '../../shared/hooks/http-hook'
 
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner'
+import ErrorModal from '../../shared/components/UIElements/ErrorModal'
 import Card from '../../shared/components/UIElements/Card'
 import Button from '../../shared/components/FormElements/Button'
 import Modal from '../../shared/components/UIElements/Modal'
@@ -16,8 +19,10 @@ const PlaceItem = ({
     address,
     creatorId,
     coordinates,
+    onDelete,
 }) => {
     const auth = useContext(AuthContext)
+    const { isLoading, error, clearError, sendRequest } = useHttp()
     const [showMap, setShowMap] = useState(false)
     const [showConfirmed, setShowConfirmed] = useState(false)
 
@@ -27,13 +32,17 @@ const PlaceItem = ({
     const showDeleteWarningHandler = () => setShowConfirmed(true)
     const closeDeleteWarningHandler = () => setShowConfirmed(false)
 
-    const confirmDeleteHandler = () => {
+    const confirmDeleteHandler = async () => {
         setShowConfirmed(false)
         console.log('DELETE')
+        await sendRequest(`http://localhost:5000/api/places/${id}`, 'DELETE')
+        onDelete(id)
     }
 
     return (
         <>
+            {error && <ErrorModal error={error} onClear={clearError} />}
+            {isLoading && <LoadingSpinner asOverlay />}
             <Modal
                 show={showMap}
                 onCancel={closeMapHandler}
@@ -80,7 +89,7 @@ const PlaceItem = ({
                         <Button inverse onClick={openMapHandler}>
                             VIEW ON MAP
                         </Button>
-                        {auth.isLoggedIn && (
+                        {auth.userId === creatorId && (
                             <>
                                 <Button to={`/places/${id}`}>EDIT</Button>
                                 <Button

@@ -55,7 +55,7 @@ const Auth = () => {
         e.preventDefault()
 
         if (isLogin) {
-            await sendRequest(
+            const res = await sendRequest(
                 'http://localhost:5000/api/users/login',
                 'POST',
                 JSON.stringify({
@@ -65,9 +65,10 @@ const Auth = () => {
                 {
                     'Content-Type': 'application/json',
                 }
-            ).then(res => auth.loggin())
+            )
+            auth.loggin(res.existingUser.id)
         } else {
-            await sendRequest(
+            const res = await sendRequest(
                 'http://localhost:5000/api/users/singup',
                 'POST',
                 JSON.stringify({
@@ -78,7 +79,8 @@ const Auth = () => {
                 {
                     'Content-Type': 'application/json',
                 }
-            ).then(res => auth.loggin())
+            )
+            auth.loggin(res.user.id)
         }
     }
 
@@ -118,9 +120,9 @@ const Auth = () => {
                             type='password'
                             element='input'
                             label='Password'
-                            errorText='Please type a valid password (min. 5 characters)'
+                            errorText='Please type a valid password (min. 6 characters)'
                             onInput={inputHandler}
-                            validators={[VALIDATOR_MIN(5)]}
+                            validators={[VALIDATOR_MIN(6)]}
                         />
                         <Button type='submit' disabled={!formState.isValid}>
                             {isLogin ? 'LOGIN' : 'SIGNUP'}
