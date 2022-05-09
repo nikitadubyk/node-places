@@ -3,6 +3,7 @@ import { useForm } from '../../shared/hooks/form-hook'
 import { AuthContext } from '../../shared/context/auth-context'
 import { useHttp } from '../../shared/hooks/http-hook'
 
+import ImageUpload from '../../shared/components/FormElements/ImageUpload'
 import Input from '../../shared/components/FormElements/Input'
 import Button from '../../shared/components/FormElements/Button'
 import Card from '../../shared/components/UIElements/Card'
@@ -96,15 +97,18 @@ const Auth = () => {
                     <hr />
                     <form onSubmit={onSubmitAuthHandler}>
                         {!isLogin && (
-                            <Input
-                                element='input'
-                                id='name'
-                                type='text'
-                                label='Your Name'
-                                onInput={inputHandler}
-                                errorText='Please enter your name'
-                                validators={[VALIDATOR_REQUIRE()]}
-                            />
+                            <>
+                                <Input
+                                    element='input'
+                                    id='name'
+                                    type='text'
+                                    label='Your Name'
+                                    onInput={inputHandler}
+                                    errorText='Please enter your name'
+                                    validators={[VALIDATOR_REQUIRE()]}
+                                />
+                                <ImageUpload id='image' center />
+                            </>
                         )}
                         <Input
                             id='email'
