@@ -35,7 +35,8 @@ const Auth = () => {
             setFormData(
                 {
                     ...formState.inputs,
-                    name: { undefined },
+                    name: undefined,
+                    image: undefined,
                 },
                 formState.inputs.email.isValid &&
                     formState.inputs.password.isValid
@@ -45,6 +46,10 @@ const Auth = () => {
                 {
                     ...formState.inputs,
                     name: { value: '', isValid: false },
+                    image: {
+                        value: null,
+                        isValid: false,
+                    },
                 },
                 false
             )
@@ -54,6 +59,8 @@ const Auth = () => {
 
     const onSubmitAuthHandler = async e => {
         e.preventDefault()
+
+        console.log(formState.inputs)
 
         if (isLogin) {
             const res = await sendRequest(
@@ -107,7 +114,11 @@ const Auth = () => {
                                     errorText='Please enter your name'
                                     validators={[VALIDATOR_REQUIRE()]}
                                 />
-                                <ImageUpload id='image' center />
+                                <ImageUpload
+                                    id='image'
+                                    center
+                                    onInput={inputHandler}
+                                />
                             </>
                         )}
                         <Input
