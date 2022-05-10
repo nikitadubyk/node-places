@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { AuthContext } from '../../shared/context/auth-context'
 import { useHttp } from '../../shared/hooks/http-hook'
+
+import ImageUpload from '../../shared/components/FormElements/ImageUpload'
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner'
 import ErrorModal from '../../shared/components/UIElements/ErrorModal'
 import Input from '../../shared/components/FormElements/Input'
@@ -33,25 +35,25 @@ const NewPlace = () => {
                 value: '',
                 isValid: false,
             },
+            image: {
+                value: '',
+                isValid: false,
+            },
         },
         false
     )
 
     const placeSubmit = async e => {
         e.preventDefault()
-        await sendRequest(
-            'http://localhost:5000/api/places',
-            'POST',
-            JSON.stringify({
-                title: formState.inputs.title.value,
-                description: formState.inputs.description.value,
-                address: formState.inputs.address.value,
-                creator: auth.userId,
-            }),
-            {
-                'Content-Type': 'application/json',
-            }
-        )
+
+        const formData = new FormData()
+        formData.append('title', formState.inputs.title.value)
+        formData.append('description', formState.inputs.description.value)
+        formData.append('address', formState.inputs.address.value)
+        formData.append('creator', auth.userId)
+        formData.append('image', formState.inputs.image.value)
+
+        await sendRequest('http://localhost:5000/api/places', 'POST', formData)
         navigate('/')
     }
 
@@ -85,6 +87,7 @@ const NewPlace = () => {
                     errorText='Please enter a valid address'
                     onInput={inputHandler}
                 />
+                <ImageUpload id='image' center onInput={inputHandler} />
                 <Button type='submit' disabled={!formState.isValid}>
                     ADD PLACE
                 </Button>

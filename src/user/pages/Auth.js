@@ -60,8 +60,6 @@ const Auth = () => {
     const onSubmitAuthHandler = async e => {
         e.preventDefault()
 
-        console.log(formState.inputs)
-
         if (isLogin) {
             const res = await sendRequest(
                 'http://localhost:5000/api/users/login',
@@ -76,17 +74,17 @@ const Auth = () => {
             )
             auth.loggin(res.existingUser.id)
         } else {
+            const formData = new FormData()
+
+            formData.append('email', formState.inputs.email.value)
+            formData.append('password', formState.inputs.password.value)
+            formData.append('name', formState.inputs.name.value)
+            formData.append('image', formState.inputs.image.value)
+
             const res = await sendRequest(
                 'http://localhost:5000/api/users/singup',
                 'POST',
-                JSON.stringify({
-                    email: formState.inputs.email.value,
-                    password: formState.inputs.password.value,
-                    name: formState.inputs.name.value,
-                }),
-                {
-                    'Content-Type': 'application/json',
-                }
+                formData
             )
             auth.loggin(res.user.id)
         }
