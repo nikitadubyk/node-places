@@ -6,10 +6,6 @@ import { useAuth } from './shared/hooks/auth-hook'
 import MainNavigation from './shared/components/Navigation/MainNavigation'
 import Users from './user/pages/Users'
 import LoadingSpinner from './shared/components/UIElements/LoadingSpinner'
-// import NewPlace from './places/pages/NewPlace'
-// import UserPlaces from './places/pages/UserPlaces'
-// import UpdatePlace from './places/pages/UpdatePlace'
-// import Auth from './user/pages/Auth'
 
 const NewPlace = lazy(() => import('./places/pages/NewPlace'))
 const UserPlaces = lazy(() => import('./places/pages/UserPlaces'))

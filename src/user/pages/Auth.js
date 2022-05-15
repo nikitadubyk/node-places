@@ -11,7 +11,7 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal'
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner'
 import {
     VALIDATOR_EMAIL,
-    VALIDATOR_MIN,
+    VALIDATOR_MINLENGTH,
     VALIDATOR_REQUIRE,
 } from '../../shared/util/validators'
 
@@ -116,6 +116,7 @@ const Auth = () => {
                                     id='image'
                                     center
                                     onInput={inputHandler}
+                                    errorText
                                 />
                             </>
                         )}
@@ -135,7 +136,7 @@ const Auth = () => {
                             label='Password'
                             errorText='Please type a valid password (min. 6 characters)'
                             onInput={inputHandler}
-                            validators={[VALIDATOR_MIN(6)]}
+                            validators={[VALIDATOR_MINLENGTH(6)]}
                         />
                         <Button type='submit' disabled={!formState.isValid}>
                             {isLogin ? 'LOGIN' : 'SIGNUP'}
