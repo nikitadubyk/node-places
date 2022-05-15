@@ -35,7 +35,7 @@ const PlaceItem = ({
     const confirmDeleteHandler = async () => {
         setShowConfirmed(false)
         await sendRequest(
-            `http://localhost:5000/api/places/${id}`,
+            `${process.env.REACT_APP_BACKEND_URL}/places/${id}`,
             'DELETE',
             null,
             {
@@ -85,7 +85,7 @@ const PlaceItem = ({
                 <Card className='place-item__content'>
                     <div className='place-item__image'>
                         <img
-                            src={`http://localhost:5000/${image}`}
+                            src={`${process.env.REACT_APP_FRONTEND_URL}/${image}`}
                             alt={title}
                         />
                     </div>

@@ -62,7 +62,7 @@ const Auth = () => {
 
         if (isLogin) {
             const res = await sendRequest(
-                'http://localhost:5000/api/users/login',
+                `${process.env.REACT_APP_BACKEND_URL}/users/login`,
                 'POST',
                 JSON.stringify({
                     email: formState.inputs.email.value,
@@ -82,7 +82,7 @@ const Auth = () => {
             formData.append('image', formState.inputs.image.value)
 
             const res = await sendRequest(
-                'http://localhost:5000/api/users/singup',
+                `${process.env.REACT_APP_BACKEND_URL}/users/singup`,
                 'POST',
                 formData
             )

@@ -8,7 +8,9 @@ const Users = () => {
     const { isLoading, sendRequest } = useHttp()
 
     const getUsers = async () => {
-        await sendRequest('http://localhost:5000/api/users').then(setUsersData)
+        await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/users`).then(
+            setUsersData
+        )
     }
 
     useEffect(() => {
